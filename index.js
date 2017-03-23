@@ -25,12 +25,12 @@ class CampsiteFilter {
     if (query && query.startDate.match(validIsoDate) && query.endDate.match(validIsoDate)) {
       this.desired = query;
     } else {
-      return new Error("Invalid Query");
+      return new Error('Invalid Query');
     }
   }
 
   violatesGapRule(rule, reservation) {
-    // Because gap rules are so specific we can easily determine "illegal" start/end dates based on a reservation's start/end dates.
+    // Because gap rules are so specific we can easily determine 'illegal' start/end dates based on a reservation's start/end dates.
     let illegalStart = moment(reservation.startDate).subtract(rule, 'days');
     let illegalEnd = moment(reservation.endDate).add(rule, 'days');
 

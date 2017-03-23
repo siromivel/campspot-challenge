@@ -10,36 +10,36 @@ describe('CampsiteFilter', () => {
   });
 
   describe('hasOverlap', () => {
-    let mockReservation = { "startDate": "2003-12-29", "endDate": "2004-01-04" };
+    let mockReservation = { 'startDate': '2003-12-29', 'endDate': '2004-01-04' };
     
     it('returns false if reservation and desired dates overlap', () => {
-      campsiteFilter.setSearch({ "startDate": "2004-01-03", "endDate": "2004-01-07" });
+      campsiteFilter.setSearch({ 'startDate': '2004-01-03', 'endDate': '2004-01-07' });
       expect(campsiteFilter.hasOverlap(mockReservation)).to.be.true;
     });
 
     it('returns true for non-overlapping dates', () => {
-      campsiteFilter.setSearch({ "startDate": "2003-12-20", "endDate": "2003-12-28" });
+      campsiteFilter.setSearch({ 'startDate': '2003-12-20', 'endDate': '2003-12-28' });
       expect(campsiteFilter.hasOverlap(mockReservation)).to.be.false;
     });
   });
 
   describe('violatesGapRule', () => {
-    let mockReservation = { "startDate": "2003-12-29", "endDate": "2004-01-04" };
+    let mockReservation = { 'startDate': '2003-12-29', 'endDate': '2004-01-04' };
     let mockRule = 5;
 
     it('returns false if desired dates violate the gap rule', () => {
-      campsiteFilter.setSearch({ "startDate": "2004-01-09", "endDate": "2004-01-15" });
+      campsiteFilter.setSearch({ 'startDate': '2004-01-09', 'endDate': '2004-01-15' });
       expect(campsiteFilter.violatesGapRule(mockRule, mockReservation)).to.be.true;
 
-      campsiteFilter.setSearch({ "startDate": "2003-12-10", "endDate": "2003-12-24" });
+      campsiteFilter.setSearch({ 'startDate': '2003-12-10', 'endDate': '2003-12-24' });
       expect(campsiteFilter.violatesGapRule(mockRule, mockReservation)).to.be.true;
     });    
 
     it('returns true if the desired dates comply with the gap rule', () => {
-      campsiteFilter.setSearch({ "startDate": "2004-01-10", "endDate": "2004-01-15" });
+      campsiteFilter.setSearch({ 'startDate': '2004-01-10', 'endDate': '2004-01-15' });
       expect(campsiteFilter.violatesGapRule(mockRule, mockReservation)).to.be.false;
 
-      campsiteFilter.setSearch({ "startDate": "2003-12-10", "endDate": "2003-12-23" });
+      campsiteFilter.setSearch({ 'startDate': '2003-12-10', 'endDate': '2003-12-23' });
       expect(campsiteFilter.violatesGapRule(mockRule, mockReservation)).to.be.false;
     });
   });
