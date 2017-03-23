@@ -25,7 +25,7 @@ Once the module has been built, run the tests by executing `npm test` from withi
 ### Using the Module
 The module follows the CommonJS pattern and is fairly easy to use. It returns an uninstantiated `CampsiteFinder` class that can then be instantiated with an appropriate data object. The data object should conform to the following JSON structure:
 
-```json
+```
 {
   "search": [{ "startDate": String, "endDate": String }],
   "campsites": [{ "id": Integer, "name": String }],
