@@ -6,6 +6,8 @@ class CampsiteFilter {
     this.parsedRules = data.gapRules.map(r => parseInt(r.gapSize + 1));
     this.desired = data.search;
     this.campsites = data.campsites;
+
+    // Map campsite IDs to their respective reservations. This allows us to handle a single site at a time without iterating any irrelevant reservations.
     this.reservationMap = data.reservations.reduce((map, reservation) => {
       if (map[reservation.campsiteId]) {
         map[reservation.campsiteId].push(reservation);
@@ -27,21 +29,21 @@ class CampsiteFilter {
     }
   }
 
-  violatesGapRule(rule, registration) {
+  violatesGapRule(rule, reservation) {
     // Because gap rules are so specific we can easily determine "illegal" start/end dates based on a reservation's start/end dates.
-    let illegalStart = moment(registration.startDate).subtract(rule, 'days');
-    let illegalEnd = moment(registration.endDate).add(rule, 'days');
+    let illegalStart = moment(reservation.startDate).subtract(rule, 'days');
+    let illegalEnd = moment(reservation.endDate).add(rule, 'days');
 
-    // Return a boolean indicating if the rule 
+    // Return a boolean indicating if the rule is violated by the reservation
     return illegalStart.isSame(this.desired.endDate, 'day') ||
            illegalEnd.isSame(this.desired.startDate, 'day');
   }
 
-  hasOverlap(registration) {
+  hasOverlap(reservation) {
     let desStart = moment(this.desired.startDate);    
-    let regStart = moment(registration.startDate);
+    let regStart = moment(reservation.startDate);
     let desEnd = moment(this.desired.endDate);
-    let regEnd = moment(registration.endDate);
+    let regEnd = moment(reservation.endDate);
 
     return desStart.isBetween(regStart, regEnd) ||
            regStart.isBetween(desStart, desEnd) ||
@@ -49,6 +51,7 @@ class CampsiteFilter {
   }
 
   filterSites() {
+    // Filter the sites using a reduce - this allows us to run a single loop to filter the sites and pluck out their just their names.
     return this.campsites.reduce((acc, site) => {
       let invalid;
 
