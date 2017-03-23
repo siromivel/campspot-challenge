@@ -2,7 +2,7 @@
 Solution to the CampSpot Developer Challenge
 
 ### Description of Solution
-I solved the challenge by implementing a class that takes in data formatted like the provided test-case JSON. The class exposes a `filterSite` method that returns a filtered array of sites that are not reserved during the requested dates and for which the requested dates violate none of the given gap rules. The module also exposes a `printSite` method; this is simply a wrapper around `filterSite` that prints each name to stdout separated by a newline in order to generate the exact output specified in the challenge.
+I solved the challenge by implementing a class that takes in data formatted like the provided test-case JSON. The class exposes a `filterSites` method that returns a filtered array of sites that are not reserved during the requested dates and for which the requested dates violate none of the given gap rules. The module also exposes a `printSites` method; this is simply a wrapper around `filterSites` that prints each name to stdout separated by a newline in order to generate the exact output specified in the challenge.
 
 Each gap rule is assessed by determining an "illegal" start and end date - those being the dates that leave a gap in violation of the rule on either side of the existing reservation. Once we have determined the illegal dates all we need to do is ensure that the desired start/end dates do not violate the respective illegal dates for the site in question.
 
