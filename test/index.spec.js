@@ -4,14 +4,13 @@ const testData = require('../data/test-case.json');
 
 describe('CampsiteFilter', () => {
   let campsiteFilter;
+  let mockReservation = { 'startDate': '2003-12-29', 'endDate': '2004-01-04' };
 
   beforeEach(() => {
     campsiteFilter = new (require('../'))(testData);
   });
 
   describe('hasOverlap', () => {
-    let mockReservation = { 'startDate': '2003-12-29', 'endDate': '2004-01-04' };
-    
     it('returns false if reservation and desired dates overlap', () => {
       campsiteFilter.setSearch({ 'startDate': '2004-01-03', 'endDate': '2004-01-07' });
       expect(campsiteFilter.hasOverlap(mockReservation)).to.be.true;
@@ -24,7 +23,6 @@ describe('CampsiteFilter', () => {
   });
 
   describe('violatesGapRule', () => {
-    let mockReservation = { 'startDate': '2003-12-29', 'endDate': '2004-01-04' };
     let mockRule = 5;
 
     it('returns false if desired dates violate the gap rule', () => {
