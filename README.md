@@ -9,7 +9,7 @@ Each gap rule is assessed by determining an "illegal" start and end date - those
 The logic is broken up into a few functions to keep things clean and testable. For details about specific functions please read `Using the Module` below. The logic is executed on a site-by-site basis.
 
 ### Assumptions
-I avoided making any assumptions about the data. Because my approach to checking a gap rule is based on determining illegal start/end dates(that is, start/end dates that leave a gap equal to the gap rule,) I added one to each gap rule in order. This was necessary because simply adding the gap rule value to the original date reflects reservations leaving a gap equal to `gapRule - 1` days where the site is unoccupied since the new reservation will begin/end on the exact dates in the search object.
+I avoided making any assumptions about the data. Because my approach to checking a gap rule is based on determining illegal start/end dates(that is, start/end dates that leave a gap equal to the gap rule,) I added one to each gap rule in order. This was necessary because simply adding the gap rule value to the original date reflects reservations leaving a gap equal to `gapRule - 1` days where the site is unoccupied as the new reservation will begin/end on the exact dates in the search object.
 
 ### Build Process
 You will need to install Node.js(>= v4.7.0) and NPM(>= v2.0.0) in order to use this module. Please reference https://nodejs.org/en/ in order to download and build a local Node environment.
