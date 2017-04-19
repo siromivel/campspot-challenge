@@ -2,7 +2,7 @@
   "name": "campspot-developer-challenge",
   "version": "1.0.0",
   "description": "My solution for Campspot's developer challenge",
-  "main": "cspot.js",
+  "main": "index.js",
   "scripts": {
     "test": "mocha test/**.spec.js"
   },
